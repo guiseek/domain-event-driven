@@ -1,1 +1,1 @@
-export type AbortFn = (params: AbortSignal) => void
+export type AbortFn<T> = (value: T, signal: AbortSignal) => void

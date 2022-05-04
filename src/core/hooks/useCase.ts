@@ -9,10 +9,10 @@ function useCase() {
     value: T,
     useCase: UseCaseFn<T>,
     validation: ValidationFn<T> = () => true,
-    abortFn: AbortFn = () => void 0
+    abortFn: AbortFn<T> = () => void 0
   ) => {
     if (!validation(value)) {
-      abortFn(controller.signal)
+      abortFn(value, controller.signal)
 
       return controller.abort()
     }

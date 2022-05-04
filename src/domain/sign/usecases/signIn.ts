@@ -1,29 +1,27 @@
-import repository from '../../../infra/sign/repository'
 import useCase from '../../../core/hooks/useCase'
-import { SignIn, SignInSuccess } from '../api'
+import { SignIn } from '../api'
 import { sign } from '../event'
 
-const validadeEmail = ({ email }: SignIn) => {
-  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)
-}
-
+/**
+ * Use case
+ */
 sign.on('signIn', (value) => {
   useCase(
     value,
-    (value) => {
-      // repository
-      //   .post<SignInSuccess, SignIn>('sign-in', value)
-      //   .then(({ message }) => {
-      //     sign.emit('signInSuccess', { message })
-      //   })
-      sign.emit('signInSuccess', { message: 'OK' })
+    
+    /* Business function */
+    (value: SignIn) => {
+      sign.emit('signInSuccess', { message: `${value.email} OK` })
     },
+    
+    /* Validation function */
     ({ email }: SignIn) => {
       return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)
     },
-    (abort) => {
-      sign.emit('signInError', { message: 'Email inválido' })
-      // abort.dispatchEvent(new Event('abort'))
+    
+    /* Abort function */
+    ({ email }: SignIn) => {
+      sign.emit('signInError', { message: `Email ${email} inválido` })
     }
   )
 })
