@@ -1,5 +1,4 @@
 export * from './useCase'
 export * from './useEvent'
 export * from './useEventHook'
-export * from './useRepository'
 export * from './useValidation'

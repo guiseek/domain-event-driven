@@ -1,14 +1,37 @@
+import { query, formValue } from './core/index'
 import { sign } from './domain/sign/api'
-import { query } from './core/utils/query'
 
-sign.on('signInSuccess', console.log)
+import './style.scss'
 
-sign.on('signInError', console.log)
+const output = query('output')
+const styles = output.classList
 
-query<'button'>('#sign-in-ok').onclick = () => {
-  sign.emit('signIn', { email: 'hello@guiseek.dev' })
+function setOutput(message: string) {
+  output.textContent = message
+
+  return {
+    error() {
+      styles.remove('success')
+      styles.add('error')
+    },
+    success() {
+      styles.remove('error')
+      styles.add('success')
+    },
+  }
 }
 
-query<'button'>('#sign-in-fail').onclick = () => {
-  sign.emit('signIn', { email: 'hello' })
+sign.on('signInError', ({ message }) => {
+  setOutput(message).error()
+})
+
+sign.on('signInSuccess', ({ message }) => {
+  setOutput(message).success()
+})
+
+const form = query('form')
+
+form.onsubmit = (event) => {
+  event.preventDefault()
+  sign.emit('signIn', formValue(form))
 }

@@ -6,3 +6,14 @@
 1. Strongly typed
 1. Functional paradigm
 1. Use cases as main focus
+
+
+## Run
+
+```sh
+npm run start --workspace=server
+```
+
+```sh
+npm run dev
+```

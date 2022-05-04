@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Domain Driven Event Demo App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <output> </output>
 
-    <button id="sign-in-ok">Sign In - Ok</button>
-    <button id="sign-in-fail">Sign In - Fail</button>
-    
+    <fieldset>
+      <legend>Sign In</legend>
+      <form>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            placeholder="Ex.: hello@guiseek.dev"
+            required
+          />
+        </label>
+
+        <button type="submit">Sign In</button>
+      </form>
+    </fieldset>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
