@@ -1,0 +1,1 @@
+export type ValueObject<T> = Record<keyof T, T[keyof T]>
