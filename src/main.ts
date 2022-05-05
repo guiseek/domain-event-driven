@@ -1,37 +1,24 @@
 import { query, formValue } from './core/index'
+import useDomEvent from './core/hooks/useDomEvent'
+import useOutput from './ui/utils/useOutput'
 import { sign } from './domain/sign/api'
 
 import './style.scss'
 
-const output = query('output')
-const styles = output.classList
-
-function setOutput(message: string) {
-  output.textContent = message
-
-  return {
-    error() {
-      styles.remove('success')
-      styles.add('error')
-    },
-    success() {
-      styles.remove('error')
-      styles.add('success')
-    },
-  }
-}
+const output = useOutput(query('output'))
 
 sign.on('signInError', ({ message }) => {
-  setOutput(message).error()
+  output.error(message)
 })
 
 sign.on('signInSuccess', ({ message }) => {
-  setOutput(message).success()
+  output.success(message)
 })
 
 const form = query('form')
+const formEvent = useDomEvent(form)
 
-form.onsubmit = (event) => {
+formEvent.on('submit', (event) => {
   event.preventDefault()
   sign.emit('signIn', formValue(form))
-}
+})

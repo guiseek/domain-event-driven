@@ -1,4 +1,6 @@
 export * from './useCase'
 export * from './useEvent'
+export * from './useElement'
+export * from './useDomEvent'
 export * from './useEventHook'
 export * from './useValidation'

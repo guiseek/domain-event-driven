@@ -1,1 +1,1 @@
-export type ValueObject<T> = Record<keyof T, T[keyof T]>
+export type ValueObject<T = any> = Record<keyof T, T[keyof T]>

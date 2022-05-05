@@ -1,8 +1,8 @@
 import httpConfig from '../utils/httpConfig'
 
-function usePost(host: string, signal?: AbortSignal) {
+function usePatch(host: string, signal?: AbortSignal) {
   return async <R, D>(endpoint: string, data: D): Promise<R> => {
-    const config = httpConfig('POST', { signal, data })
+    const config = httpConfig('PATCH', { signal, data })
 
     const url = `${host}/${endpoint}`
 
@@ -17,4 +17,4 @@ function usePost(host: string, signal?: AbortSignal) {
   }
 }
 
-export { usePost }
+export { usePatch }

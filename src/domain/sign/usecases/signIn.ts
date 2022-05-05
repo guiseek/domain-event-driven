@@ -1,6 +1,6 @@
 import useCase from '../../../core/hooks/useCase'
 import { SignIn, SignInSuccess } from '../api'
-import post from '../../../infra/sign/post'
+import http from '../../../infra/sign/http'
 import { sign } from '../event'
 
 /**
@@ -12,7 +12,8 @@ sign.on('signIn', (value) => {
 
     /* Business */
     (value) => {
-      post<SignInSuccess, SignIn>('in', value)
+      http
+        .post<SignInSuccess, SignIn>('in', value)
         .then((response) => {
           sign.emit('signInSuccess', response)
         })
